@@ -1,4 +1,4 @@
-import asyncio, json, re, httpx
+import asyncio, json, re, httpx, urllib.parse
 from io import BytesIO
 from flask import jsonify
 
@@ -30,7 +30,7 @@ async def DownloadVideo(video_url):
                         "Accept-Encoding": "identity;q=1, *;q=0",
                         "Sec-Fetch-Mode": "no-cors",
                         "Accept": "*/*",
-                        "Host": "video.twimg.com",
+                        "Host": "{}".format(str(urllib.parse.urlparse(final_video_url).netloc)),
                         "Range": "bytes=0-",
                         "Referer": "{}".format(final_video_url),
                         "Sec-Fetch-Dest": "video",

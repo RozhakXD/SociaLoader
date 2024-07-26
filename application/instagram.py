@@ -1,4 +1,4 @@
-import asyncio, httpx, re
+import asyncio, httpx, re, urllib.parse
 from io import BytesIO
 from flask import jsonify
 
@@ -36,7 +36,7 @@ async def DownloadVideo(video_url):
                 "Range": "bytes=0-",
                 "Referer": "{}".format(final_video_url),
                 "Sec-Fetch-Dest": "video",
-                "Host": "scontent.cdninstagram.com",
+                "Host": "{}".format(str(urllib.parse.urlparse(final_video_url).netloc)),
             })
 
             response3 = await session.get("{}".format(final_video_url))

@@ -5,7 +5,10 @@ from flask import jsonify
 async def DownloadVideo(video_url):
     async with httpx.AsyncClient() as session:
         try:
-            video_url = ('https://m.facebook.com' + str(video_url).split('.facebook.com')[1])
+            if len(video_url) != 0 and 'facebook.com' in str(video_url):
+                video_url = ('https://m.facebook.com' + str(video_url).split('.facebook.com')[1])
+            else:
+                return jsonify({"error": "Enter the Facebook reels or video link correctly. Please try again!"}), 400
             session.headers.update({
                 "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
                 "Accept-Language": "id,id-ID;q=0.9,en-US;q=0.8,en;q=0.7",

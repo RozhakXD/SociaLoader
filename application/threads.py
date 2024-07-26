@@ -1,4 +1,4 @@
-import asyncio, re, httpx
+import asyncio, re, httpx, urllib.parse
 from io import BytesIO
 from flask import jsonify
 
@@ -28,7 +28,7 @@ async def DownloadVideo(video_url):
             else:
                 return jsonify({"error": "Can't find download link!"}), 400
             session.headers.update({
-                "Host": "scontent.cdninstagram.com",
+                "Host": "{}".format(str(urllib.parse.urlparse(final_video_url).netloc)),
             })
 
             response2 = await session.get("{}".format(final_video_url))
