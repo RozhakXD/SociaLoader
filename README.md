@@ -15,23 +15,26 @@ To run SociaLoader locally, follow these steps:
 - For Termux: Ensure you have Termux installed from the [F-Droid](https://f-droid.org/repo/com.termux_1020.apk).
 - Ensure you have Python 3 installed.
 
-#### Kali Linux (WSL)
-1. `git clone https://github.com/RozhakXD/SociaLoader.git`
-2. `cd SociaLoader`
-3. `sudo pip3 install -r requirements.txt`
-4. `python3 app.py`
+**Kali Linux (WSL)**
+```
+1. sudo apt update && sudo apt upgrade -y
+2. sudo apt install python3-pip -y
+3. sudo apt install git -y
+4. git clone https://github.com/RozhakXD/SociaLoader.git
+5. cd SociaLoader
+6. sudo pip3 install -r requirements.txt
+7. python3 app.py
+```
 
-#### Termux
-1. `git clone https://github.com/RozhakXD/SociaLoader.git`
-2. `cd SociaLoader`
-3. `pip install -r requirements.txt`
-4. `python app.py`
-
-#### Windows PowerShell
-1. `git clone https://github.com/RozhakXD/SociaLoader.git`
-2. `cd SociaLoader`
-3. `pip install -r requirements.txt`
-4. `python app.py`
+**Termux**
+```
+1. apt update -y && apt upgrade -y
+2. pkg install git python-pip
+3. git clone https://github.com/RozhakXD/SociaLoader.git
+4. cd SociaLoader
+5. pip install -r requirements.txt
+6. python app.py
+```
 
 After running app.py, the application will start and you can interact with it through the command line interface or web interface (if applicable). Follow the on-screen instructions to use SociaLoader's features.
 
