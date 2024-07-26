@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SociaLoader</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='icons/SociaLoader.ico') }}" type="image/png">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            align-items: center;
+            margin: 0;
+            min-height: 100vh;
+            box-sizing: border-box;
+            position: relative;
+            padding-bottom: 80px;
+        }
+
+        header {
+            animation: fadeIn 1s ease-out;
+            margin: 20px 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        .logo h1 {
+            font-size: 2.5em;
+            margin: 0;
+            color: #333333;
+        }
+
+        .logo p {
+            font-size: 1.2em;
+            margin: 5px 0 0;
+            color: #666666;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 25px;
+            box-sizing: border-box;
+            flex-direction: column;
+            max-width: 500px;
+            display: flex;
+            align-items: center;
+            width: 90%;
+            margin-bottom: 20px;
+        }
+
+        .input-container {
+            display: none;
+        }
+
+        .social-media-icons {
+            justify-content: center;
+            flex-wrap: wrap;
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .icon {
+            transition: transform 0.2s, box-shadow 0.2s;
+            color: #333333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            margin: 10px;
+            width: 80px;
+            text-align: center;
+        }
+
+        .icon img {
+            height: 48px;
+            width: 48px;
+        }
+
+        .icon span {
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .icon:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform: scale(1.1);
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.9em;
+            width: 100%;
+            color: #666666;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 20px 0;
+        }
+
+        footer p {
+            margin-bottom: 5px;
+            margin-top: 40px;
+        }
+
+        footer a {
+            text-decoration: none;
+            margin: 0 10px;
+            color: #666666;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <h1>SociaLoader</h1>
+            <p>Pengunduh Video</p>
+        </div>
+    </header>
+    <main class="container">
+        <section class="social-media-icons">
+            <a href="{{ url_for('DownloadFromFacebook') }}" class="icon facebook" title="Facebook">
+                <img src="{{ url_for('static', filename='icons/facebook.png') }}" alt="Facebook">
+                <span>Facebook</span>
+            </a>
+            <a href="{{ url_for('DownloadFromInstagram') }}" class="icon instagram" title="Instagram">
+                <img src="{{ url_for('static', filename='icons/instagram.png') }}" alt="Instagram">
+                <span>Instagram</span>
+            </a>
+            <a href="{{ url_for('DownloadFromThreads') }}" class="icon threads" title="Threads">
+                <img src="{{ url_for('static', filename='icons/threads.png') }}" alt="Threads">
+                <span>Threads</span>
+            </a>
+            <a href="{{ url_for('DownloadFromTwitter') }}" class="icon twitter" title="Twitter">
+                <img src="{{ url_for('static', filename='icons/twitter.png') }}" alt="Twitter">
+                <span>Twitter</span>
+            </a>
+            <a href="{{ url_for('DownloadFromTiktok') }}" class="icon tiktok" title="TikTok">
+                <img src="{{ url_for('static', filename='icons/tiktok.png') }}" alt="TikTok">
+                <span>TikTok</span>
+            </a>
+        </section>
+    </main>
+    <footer>
+        <p>Made with ❤️ by Rozhak</p>
+        <a href="{{ url_for('TermsOfService') }}">Terms of Service</a> | <a href="{{ url_for('PrivacyPolicy') }}">Privacy Policy</a>
+    </footer>
+</body>
+</html>

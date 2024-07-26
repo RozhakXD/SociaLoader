@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SociaLoader - {{ platform.capitalize() }} Downloader</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='icons/SociaLoader.ico') }}" type="image/png">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            min-height: 100vh;
+            box-sizing: border-box;
+            position: relative;
+            padding-bottom: 80px;
+        }
+
+        header {
+            animation: fadeIn 1s ease-out;
+            justify-content: space-between;
+            width: 100%;
+            background-color: #ffffff;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        header img {
+            height: 44px;
+            cursor: pointer;
+        }
+
+        header h1 {
+            font-size: 1.5em;
+            margin: 0;
+            color: #333333;
+        }
+
+        main {
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .input-container {
+            background-color: #ffffff;
+            border-radius: 25px;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            align-items: center;
+            display: flex;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        .input-container input {
+            background-color: #ffffff;
+            border-radius: 25px;
+            font-size: 1em;
+            flex: 1;
+            padding: 10px;
+            border: none;
+            outline: none;
+            color: #333333;
+            box-shadow: none;
+        }
+
+        .input-container img {
+            width: 24px;
+            height: 24px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .buttons-container button {
+            transition: background-color 0.3s, transform 0.3s;
+            background-color: #8BC34A;
+            border-radius: 25px;
+            color: #ffffff;
+            padding: 10px;
+            margin: 0 5px;
+            cursor: pointer;
+            border: none;
+            font-size: 1em;
+            flex: 1;
+        }
+
+        .buttons-container button:hover {
+            background-color: #7CB342;
+            transform: translateY(-2px);
+        }
+
+        .buttons-container button:active {
+            transform: translateY(0);
+        }
+
+        .video-preview {
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 25px;
+            padding: 10px;
+            margin-top: 20px;
+            box-sizing: border-box;
+            display: none;
+            position: relative;
+        }
+
+        .video-preview video {
+            width: 100%;
+            border-radius: 25px;
+        }
+
+        .loading-message {
+            margin-top: 20px;
+            display: none;
+            color: #555;
+            font-size: 1em;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.9em;
+            width: 100%;
+            color: #666666;
+            bottom: 0;
+            left: 0;
+            padding: 20px 0;
+            position: absolute;
+        }
+
+        footer p {
+            margin-bottom: 5px;
+            margin-top: 0;
+        }
+
+        footer a {
+            text-decoration: none;
+            margin: 0 10px;
+            color: #666666;
+        }
+
+        .modal {
+            background-color: rgba(0,0,0,0.5);
+            justify-content: center;
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            align-items: center;
+        }
+
+        .modal-content {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: #fefefe;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+        }
+
+        .modal-header {
+            justify-content: space-between;
+            display: flex;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+        }
+
+        .close {
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .modal-body p {
+            margin: 10px 0;
+        }
+
+        .loading-message {
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            main {
+                width: 95%;
+            }
+
+            .input-container, .buttons-container button, .video-preview {
+                padding: 10px;
+            }
+
+            header img {
+                height: 40px;
+            }
+
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.2em;
+            }
+
+            header img {
+                height: 36px;
+            }
+
+            .input-container img {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='icons/back.png') }}" alt="Back" onclick="window.history.back()">
+        <h1>{{ platform.capitalize() }}</h1>
+        <img src="{{ url_for('static', filename='icons/' + platform.lower() + '.png') }}" alt="{{ platform.capitalize() }}">
+    </header>
+    <main>
+        <div class="input-container">
+            <input type="text" id="videoUrl" placeholder="{{ placeholder }}">
+            <img src="{{ url_for('static', filename='icons/question.png') }}" alt="Help" onclick="OpenHelpModal()">
+        </div>
+        <div class="buttons-container">
+            <button onclick="pasteLink()">TEMPELKAN</button>
+            <button onclick="downloadVideo()">UNDUH</button>
+        </div>
+        <div class="loading-message" id="loadingMessage">Sedang mengunduh video...</div>
+        <div class="video-preview" id="videoPreview">
+            <video id="video" controls preload="auto"></video>
+        </div>
+    </main>
+    <footer>
+        <p>Made with ❤️ by Rozhak</p>
+        <a href="{{ url_for('TermsOfService') }}">Terms of Service</a> | <a href="{{ url_for('PrivacyPolicy') }}">Privacy Policy</a>
+    </footer>
+
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Cara Menggunakan</h2>
+                <span class="close" onclick="CloseHelpModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>1. Pertama Anda harus menyalin tautan video dari {{ platform.capitalize() }}.</p>
+                <p>2. Tempelkan tautan video di kotak input di atas.</p>
+                <p>3. Klik tombol "TEMPELKAN" untuk menempelkan tautan dari clipboard Anda.</p>
+                <p>4. Klik tombol "UNDUH" untuk mulai mengunduh video.</p>
+                <p>5. Video yang diunduh akan diputar di bawah setelah selesai.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="errorModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Error</h2>
+                <span class="close" onclick="CloseErrorModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="errorMessageBody">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function pasteLink() {
+            navigator.clipboard.readText()
+                .then(text => {
+                    document.getElementById('videoUrl').value = text;
+                })
+                .catch(err => {
+                    console.error('Failed to read clipboard contents: ', err);
+                    alert('Gagal membaca isi clipboard. Pastikan Anda memberikan izin yang diperlukan!');
+                });
+        }
+
+        function downloadVideo() {
+            const videoUrl = document.getElementById('videoUrl').value;
+            const loadingMessage = document.getElementById('loadingMessage');
+            const videoPreview = document.getElementById('videoPreview');
+            const videoElement = document.getElementById('video');
+            const errorMessageBody = document.getElementById('errorMessageBody');
+
+            loadingMessage.style.display = 'block';
+            videoPreview.style.display = 'none';
+            CloseErrorModal();
+
+            fetch(`/${'{{ platform }}'}/downloader/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ url: videoUrl })
+            })
+
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(data => { throw new Error(data.error); });
+                }
+                return response.blob();
+            })
+
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                videoElement.src = url;
+                videoElement.load();
+                videoPreview.style.display = 'block';
+                loadingMessage.style.display = 'none';
+
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                const randomString = Math.random().toString(36).substring(7);
+                a.download = `${randomString}.mp4`;
+                document.body.appendChild(a);
+                a.click();
+
+                videoElement.onloadeddata = function() {
+                    window.URL.revokeObjectURL(url);
+                };
+            })
+
+            .catch(error => {
+                console.error('Error:', error);
+                loadingMessage.style.display = 'none';
+                errorMessageBody.textContent = error.message;
+                OpenErrorModal();
+            });
+        }
+
+        function OpenHelpModal() {
+            document.getElementById('helpModal').style.display = 'flex';
+        }
+
+        function CloseHelpModal() {
+            document.getElementById('helpModal').style.display = 'none';
+        }
+
+        function OpenErrorModal() {
+            document.getElementById('errorModal').style.display = 'flex';
+        }
+
+        function CloseErrorModal() {
+            document.getElementById('errorModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target === document.getElementById('helpModal')) {
+                CloseHelpModal();
+            }
+            if (event.target === document.getElementById('errorModal')) {
+                CloseErrorModal();
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='icons/SociaLoader.ico') }}" type="image/png">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f9;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            background-color: #ffffff;
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.5em;
+            color: #333333;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-sizing: border-box;
+            flex: 1;
+            width: calc(100% - 40px);
+        }
+
+        h2 {
+            font-size: 1.2em;
+            margin-top: 20px;
+            color: #4CAF50;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+            padding: 20px 0;
+            border-top: 1px solid #e1e1e1;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer a {
+            color: #8BC34A;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Terms of Service</h1>
+    </header>
+    <main>
+        <h2>1. Introduction</h2>
+        <p>Welcome to SociaLoader. These terms and conditions outline the rules and regulations for the use of our service.</p>
+        
+        <h2>2. User Agreement</h2>
+        <p>By accessing this service, you accept these terms and conditions in full. Do not continue to use SociaLoader if you do not accept all of the terms and conditions stated on this page.</p>
+        
+        <h2>3. Intellectual Property</h2>
+        <p>Other than the content you own, under these terms, SociaLoader and/or its licensors own all the intellectual property rights and materials contained in this service.</p>
+        
+        <h2>4. Restrictions</h2>
+        <p>You are specifically restricted from all of the following:</p>
+        <ul>
+            <li>Publishing any service material in any other media;</li>
+            <li>Selling, sublicensing, and/or otherwise commercializing any service material;</li>
+            <li>Using this service in any way that is or may be damaging to this service;</li>
+            <li>Using this service in any way that impacts user access to this service;</li>
+        </ul>
+        
+        <h2>5. Limitation of Liability</h2>
+        <p>In no event shall SociaLoader, nor any of its officers, directors, and employees, be held liable for anything arising out of or in any way connected with your use of this service whether such liability is under contract. SociaLoader, including its officers, directors, and employees shall not be held liable for any indirect, consequential, or special liability arising out of or in any way related to your use of this service.</p>
+        
+        <h2>6. Indemnification</h2>
+        <p>You hereby indemnify to the fullest extent SociaLoader from and against any and all liabilities, costs, demands, causes of action, damages, and expenses arising in any way related to your breach of any of the provisions of these terms.</p>
+        
+        <h2>7. Governing Law & Jurisdiction</h2>
+        <p>These terms will be governed by and interpreted in accordance with the laws of the State of Indonesian, and you submit to the non-exclusive jurisdiction of the state and federal courts located in Indonesian for the resolution of any disputes.</p>
+    </main>
+    <footer>
+        <p>© 2024 SociaLoader. All Rights Reserved.</p>
+        <p><a href="{{ url_for('PrivacyPolicy') }}">Privacy Policy</a></p>
+    </footer>
+</body>
+</html>
